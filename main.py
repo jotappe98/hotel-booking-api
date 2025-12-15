@@ -50,6 +50,23 @@ if __name__ == '__main__':
                 HotelModel(hotel_id=2, nome='Majestic Palace Hotel', avaliacao=4.9, diaria=1531.00,
                            cidade='Florianópolis'),
                 HotelModel(hotel_id=3, nome='Nooma Hotel', avaliacao=4.7, diaria=939.00, cidade='Curitiba'),
+                HotelModel(hotel_id=4, nome='Hotel Fasano', avaliacao=4.8, diaria=1250.00, cidade='São Paulo'),
+                HotelModel(hotel_id=5, nome='Copacabana Palace', avaliacao=4.9, diaria=1800.00, cidade='Rio de Janeiro'),
+                HotelModel(hotel_id=6, nome='Ibis Styles', avaliacao=4.2, diaria=300.00, cidade='Curitiba'),
+                HotelModel(hotel_id=7, nome='Sheraton Grand', avaliacao=4.7, diaria=950.00, cidade='Salvador'),
+                HotelModel(hotel_id=8, nome='Pestana Rio Atlântica', avaliacao=4.6, diaria=950.00, cidade='Rio de Janeiro'),
+                HotelModel(hotel_id=9, nome='Maksoud Plaza Hotel', avaliacao=4.5, diaria=760.00, cidade='São Paulo'),
+                HotelModel(hotel_id=10, nome='Hotel Unique', avaliacao=4.8, diaria=1200.00, cidade='São Paulo'),
+                HotelModel(hotel_id=11, nome='Grand Hyatt Rio de Janeiro', avaliacao=4.7, diaria=1250.00, cidade='Rio de Janeiro'),
+                HotelModel(hotel_id=12, nome='Mercure Recife Navegantes', avaliacao=4.3, diaria=400.00, cidade='Recife'),
+                HotelModel(hotel_id=13, nome='Windsor Barra Hotel', avaliacao=4.5, diaria=850.00, cidade='Rio de Janeiro'),
+                HotelModel(hotel_id=14, nome='Royal Tulip Brasília', avaliacao=4.6, diaria=750.00, cidade='Brasília'),
+                HotelModel(hotel_id=15, nome='Radisson Blu São Paulo', avaliacao=4.5, diaria=700.00, cidade='São Paulo'),
+                HotelModel(hotel_id=16, nome='Blue Tree Premium Faria Lima', avaliacao=4.4, diaria=650.00, cidade='São Paulo'),
+                HotelModel(hotel_id=17, nome='Hotel Do Canal', avaliacao=4.3, diaria=300.00, cidade='Salvador'),
+                HotelModel(hotel_id=18, nome='Ritz-Carlton Rio de Janeiro', avaliacao=4.9, diaria=2500.00, cidade='Rio de Janeiro'),
+                HotelModel(hotel_id=19, nome='Nacional Inn Recife', avaliacao=4.2, diaria=350.00, cidade='Recife'),
+                HotelModel(hotel_id=20, nome='Hotel PortoBay Rio Internacional', avaliacao=4.6, diaria=1100.00, cidade='Rio de Janeiro')
             ]
 
             for hotel in hoteis_iniciais:
