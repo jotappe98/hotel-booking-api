@@ -1,8 +1,6 @@
-# Hotel Booking API
+API REST desenvolvida com **Python** e **Flask** como projeto de estudo, com o objetivo de praticar conceitos de backend como autenticação, integração com banco de dados e arquitetura RESTful.
 
-REST API developed with **Python** and **Flask** as a study project, aiming to practice backend concepts such as authentication, database integration and RESTful architecture.
-
-##  Technologies
+## Tecnologias
 - Python
 - Flask
 - Flask-RESTful
@@ -10,32 +8,33 @@ REST API developed with **Python** and **Flask** as a study project, aiming to p
 - Flask-SQLAlchemy
 - SQLite
 
-##  Features
-- User registration and authentication (JWT)
-- Hotel CRUD (Create, Read, Update, Delete)
-- Protected routes using JWT
-- Token blacklist (logout)
+## Funcionalidades
+- Registro e autenticação de usuários (JWT)
+- CRUD de hotéis (Criar, Ler, Atualizar, Deletar)
+- Rotas protegidas utilizando JWT
+- Lista negra de tokens (logout)
+- **Hotéis mock adicionados para testar filtros avançados** (por cidade, valor da diária e avaliação)
 
-##  How to run the project
+## Como rodar o projeto
 
 ```bash
-# clone repository
+# clone o repositório
 git clone https://github.com/your-username/hotel-booking-api.git
 
-# enter project folder
+# entre na pasta do projeto
 cd hotel-booking-api
 
-# create virtual environment
+# crie um ambiente virtual
 python -m venv venv
 
-# activate venv
+# ative o venv
 # Windows
 venv\Scripts\activate
 # Linux/Mac
 source venv/bin/activate
 
-# install dependencies
+# instale as dependências
 pip install -r requirements.txt
 
-# run application
+# rode a aplicação
 python main.py
