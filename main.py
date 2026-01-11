@@ -44,7 +44,8 @@ if __name__ == '__main__':
 
         from models.hotel import HotelModel
 
-        if HotelModel.query.first() is None:
+        if HotelModel.query.count() < 20:
+            
             hoteis_iniciais = [
                 HotelModel(hotel_id=1, nome='Hotel Laghetto', avaliacao=4.8, diaria=530.10, cidade='Porto Alegre'),
                 HotelModel(hotel_id=2, nome='Majestic Palace Hotel', avaliacao=4.9, diaria=1531.00,
