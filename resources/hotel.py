@@ -15,6 +15,8 @@ path_params.add_argument('wifi', type=bool, location='args')
 path_params.add_argument('piscina', type=bool, location='args')
 path_params.add_argument('estacionamento', type=bool, location='args')
 path_params.add_argument('cafe_da_manha', type=bool, location='args')
+path_params.add_argument('page', type=int, location='args')
+
 
 
 def not_empty(valor):
@@ -58,9 +60,17 @@ class Hoteis(Resource):
         if dados.get('cafe_da_manha') is not None:
             query = query.filter(HotelModel.cafe_da_manha == dados['cafe_da_manha'])
 
+        # PAGINAÇÃO
+        page = dados.get('page') or 1
+        itens_por_pagina = 5
+        offset = (page - 1) * itens_por_pagina
+
+        query = query.offset(offset).limit(itens_por_pagina)
+
         hoteis = [hotel.json() for hotel in query.all()]
 
         return {'hoteis': hoteis}, 200
+
    
    
 
