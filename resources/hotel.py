@@ -2,44 +2,20 @@ from flask_restful import Resource, reqparse
 from models.hotel import HotelModel
 from sqlalchemy.exc import SQLAlchemyError
 from flask_jwt_extended import jwt_required
-import sqlite3
-
-def normalize_path_params ( cidade = None,
-                            avaliacao_min = 0,
-                            avaliacao_max = 5,
-                            diaria_min = 0,
-                            diaria_max = 10000,
-                            limit = 50,
-                            offset = 0, **dados):
-    if cidade:
-        return {
-            'avaliacao_min': avaliacao_min,
-            'avaliacao_max': avaliacao_max,
-            'diaria_min': diaria_min,
-            'diaria_max': diaria_max,
-            'cidade': cidade,
-            'limit': limit,
-            'offset': offset
-        }
-    return {
-        'avaliacao_min': avaliacao_min,
-        'avaliacao_max': avaliacao_max,
-        'diaria_min': diaria_min,
-        'diaria_max': diaria_max,
-        'limit': limit,
-        'offset': offset
-    }
-
-
 
 path_params = reqparse.RequestParser()
-path_params.add_argument('cidade', type = str)
-path_params.add_argument('avaliacao_min', type = float)
-path_params.add_argument('avaliacao_max', type = float)
-path_params.add_argument('diaria_min', type = float)
-path_params.add_argument('diaria_max', type = float)
-path_params.add_argument('limit', type = int)
-path_params.add_argument('offset', type = int)
+path_params.add_argument('cidade', type=str, location='args')
+path_params.add_argument('avaliacao_min', type=float, location='args')
+path_params.add_argument('avaliacao_max', type=float, location='args')
+path_params.add_argument('diaria_min', type=float, location='args')
+path_params.add_argument('diaria_max', type=float, location='args')
+path_params.add_argument('limit', type=int, location='args')
+path_params.add_argument('offset', type=int, location='args')
+path_params.add_argument('wifi', type=bool, location='args')
+path_params.add_argument('piscina', type=bool, location='args')
+path_params.add_argument('estacionamento', type=bool, location='args')
+path_params.add_argument('cafe_da_manha', type=bool, location='args')
+
 
 def not_empty(valor):
     if not valor or valor.strip() == "":
@@ -48,52 +24,45 @@ def not_empty(valor):
 
 
 class Hoteis(Resource):
+    
     def get(self):
-        connection = sqlite3.connect('instance/banco.db')
-        cursor = connection.cursor()
-
-
+        
         dados = path_params.parse_args()
-        dados_validos = {chave: dados[chave] for chave in dados if dados[chave] is not None} #Recebe apenas os parâmetros que foram passados na requisição e são válidos
-        parametros = normalize_path_params(**dados_validos)
 
-        if not parametros.get('cidade'):
-            consulta = "SELECT * FROM hoteis \
-            WHERE (avaliacao > ?) AND (avaliacao < ?) \
-            AND (diaria > ?) AND (diaria < ?) \
-            LIMIT ? OFFSET ?"
-            tupla = tuple([parametros [chave] for chave in parametros]) 
-            resultado = cursor.execute(consulta, tupla)
-        else:
-            consulta = "SELECT * FROM hoteis \
-            WHERE (avaliacao > ?) AND (avaliacao < ?) \
-            AND (diaria > ?) AND (diaria < ?) \
-            AND (cidade = ?) \
-            LIMIT ? OFFSET ?"
-            tupla = tuple([parametros [chave] for chave in parametros]) 
-            resultado = cursor.execute(consulta, tupla)
+        query = HotelModel.query
 
-        rows = resultado.fetchall() 
-        
-        hoteis = []
-        for row in resultado:
-            Hoteis.append({
-                'hotel_id': row[0],
-                'nome': row[1],
-                'avaliacao': row[2],
-                'diaria': row[3],
-                'cidade': row[4]
-            })
+        if dados.get('cidade'):
+            query = query.filter(HotelModel.cidade == dados['cidade'])
 
+        if dados.get('avaliacao_min'):
+            query = query.filter(HotelModel.avaliacao >= dados['avaliacao_min'])
 
-        connection.close()
+        if dados.get('avaliacao_max'):
+            query = query.filter(HotelModel.avaliacao <= dados['avaliacao_max'])
 
-        
-        try:
-            hoteis = [hotel.json() for hotel in HotelModel.query.all()]
-            return {'hoteis': hoteis}, 200
-        except SQLAlchemyError:
-            return {'message': 'An internal error occurred while fetching hotels'}, 500
+        if dados.get('diaria_min'):
+            query = query.filter(HotelModel.diaria >= dados['diaria_min'])
+
+        if dados.get('diaria_max'):
+            query = query.filter(HotelModel.diaria <= dados['diaria_max'])
+
+        if dados.get('wifi') is not None:
+            query = query.filter(HotelModel.wifi == dados['wifi'])
+
+        if dados.get('piscina') is not None:
+            query = query.filter(HotelModel.piscina == dados['piscina'])
+
+        if dados.get('estacionamento') is not None:
+            query = query.filter(HotelModel.estacionamento == dados['estacionamento'])
+
+        if dados.get('cafe_da_manha') is not None:
+            query = query.filter(HotelModel.cafe_da_manha == dados['cafe_da_manha'])
+
+        hoteis = [hotel.json() for hotel in query.all()]
+
+        return {'hoteis': hoteis}, 200
+   
+   
 
 class Hotel(Resource):
     argumentos = reqparse.RequestParser()
@@ -129,6 +98,7 @@ class Hotel(Resource):
             return {'message': 'An internal error occurred trying to save hotel'}, 500
 
         return hotel.json(), 201
+        
 
     @jwt_required()
     def put(self, hotel_id):

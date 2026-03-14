@@ -28,7 +28,6 @@ def token_revogado(_, __):
 
 api.add_resource(Hoteis, '/hoteis')
 api.add_resource(Hotel, '/hoteis/<int:hotel_id>')
-
 api.add_resource(User, '/usuarios/<int:user_id>')
 api.add_resource(UserRegister, '/cadastro')
 api.add_resource(SearchUser, '/usuarios')
