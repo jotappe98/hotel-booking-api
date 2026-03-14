@@ -17,7 +17,7 @@ class HotelModel(banco.Model):
     imagem_url = banco.Column(banco.String(200))
 
     def __init__(self, hotel_id, nome, cidade, avaliacao, diaria,
-                 wifi=False, piscina=False, estacionamento=False, cafe_da_manha=False):
+                 wifi=False, piscina=False, estacionamento=False, cafe_da_manha=False, descricao=None, imagem_url=None):
         self.hotel_id = hotel_id
         self.nome = nome
         self.cidade = cidade
@@ -27,6 +27,8 @@ class HotelModel(banco.Model):
         self.piscina = piscina
         self.estacionamento = estacionamento
         self.cafe_da_manha = cafe_da_manha
+        self.descricao = descricao
+        self.imagem_url = imagem_url
 
     def json(self):
         return {
@@ -38,7 +40,9 @@ class HotelModel(banco.Model):
             'wifi': self.wifi,
             'piscina': self.piscina,
             'estacionamento': self.estacionamento,
-            'cafe_da_manha': self.cafe_da_manha
+            'cafe_da_manha': self.cafe_da_manha,
+            'descricao': self.descricao,
+            'imagem_url': self.imagem_url
         }
 
     @classmethod
