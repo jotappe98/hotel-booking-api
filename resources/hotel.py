@@ -60,16 +60,31 @@ class Hoteis(Resource):
         if dados.get('cafe_da_manha') is not None:
             query = query.filter(HotelModel.cafe_da_manha == dados['cafe_da_manha'])
 
-        # PAGINAÇÃO
+
+       # PAGINAÇÃO
         page = dados.get('page') or 1
+
         itens_por_pagina = 5
+
+        total_hoteis = query.count()
+
+        total_paginas = (total_hoteis + itens_por_pagina - 1) // itens_por_pagina
+
         offset = (page - 1) * itens_por_pagina
 
         query = query.offset(offset).limit(itens_por_pagina)
 
         hoteis = [hotel.json() for hotel in query.all()]
 
-        return {'hoteis': hoteis}, 200
+        return {
+            "page": page,
+            "per_page": itens_por_pagina,
+            "total_hoteis": total_hoteis,
+            "total_paginas": total_paginas,
+            "hoteis": hoteis
+        }, 200
+
+
 
    
    

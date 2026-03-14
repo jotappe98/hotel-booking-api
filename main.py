@@ -28,7 +28,7 @@ def token_revogado(_, __):
 
 
 # ROTAS DA API
-api.add_resource(Hoteis, '/hoteis')
+api.add_resource(Hoteis, '/hoteis', '/hoteis/')
 api.add_resource(Hotel, '/hoteis/<int:hotel_id>')
 api.add_resource(User, '/usuarios/<int:user_id>')
 api.add_resource(UserRegister, '/cadastro')
