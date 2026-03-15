@@ -1,23 +1,31 @@
-//renderização dos hotéis
+// carregar hotéis da API
 
-let allHotels = []
-let startIndex = 0
-const visibleCards = 5
+// variáveis globais do carrossel
+window.currentPage = 1
+window.totalPages = 1
+window.startIndex = 0
+window.visibleCards = 4
+window.allHotels = []
 
-async function loadHotels(page = 1, search = "") {
+// carregar hotéis da API
+async function loadHotels(page = 1, search = ""){
 
     const data = await getHotels(page, search)
 
+    if(!data) return
+
+    currentPage = data.page
     totalPages = data.total_paginas
 
-    // adiciona novos hotéis ao cache
+    // adicionar novos hotéis à lista
     allHotels = [...allHotels, ...data.hoteis]
 
     renderHotels()
 
-
 }
 
+
+// renderizar hotéis
 function renderHotels(){
 
     const cardsContainer = document.getElementById("hotelCards")
@@ -32,10 +40,16 @@ function renderHotels(){
         card.classList.add("hotel-card")
 
         card.innerHTML = `
-        
-            <img src="${hotel.imagem_url.trim()}" alt="${hotel.nome}">
-            
-            
+            <div class="hotel-image">
+
+                <img src="${hotel.imagem_url}" alt="${hotel.nome}">
+
+                <div class="favorite">❤</div>
+
+                <button class="reserve-btn">Reservar</button>
+
+            </div>
+
             <div class="hotel-card-content">
             
                 <h3>${hotel.nome}</h3>
@@ -47,8 +61,13 @@ function renderHotels(){
                 <p>R$ ${hotel.diaria} / noite</p>
                 
             </div>
-        
         `
+
+        const favoriteBtn = card.querySelector(".favorite")
+
+        favoriteBtn.onclick = () => {
+            favoriteBtn.classList.toggle("active")
+        }
 
         cardsContainer.appendChild(card)
 
@@ -58,8 +77,19 @@ function renderHotels(){
 
 }
 
+
+// eventos
 document.addEventListener("DOMContentLoaded", () => {
 
-    loadHotels()
+    document.querySelector(".arrow.left").addEventListener("click", () => {
+        moveCarousel("prev")
+    })
+
+    document.querySelector(".arrow.right").addEventListener("click", () => {
+        moveCarousel("next")
+    })
+
+    // carregar primeira página
+    loadHotels(1)
 
 })

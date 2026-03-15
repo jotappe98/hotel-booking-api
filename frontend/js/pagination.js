@@ -1,4 +1,4 @@
-//controle dos dots(pontos,bolinhas)
+// controle dos dots
 
 function updateDots(){
 
@@ -23,5 +23,15 @@ function updateDots(){
         dotsContainer.appendChild(dot)
 
     }
+
+}
+
+
+function changePage(page){
+
+    startIndex = (page - 1) * visibleCards
+    currentPage = page
+
+    renderHotels()
 
 }

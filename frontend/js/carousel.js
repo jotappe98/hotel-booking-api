@@ -1,7 +1,13 @@
 //navegação entre páginas
 
+// navegação entre páginas
+
 window.currentPage = 1
 window.totalPages = 1
+
+window.startIndex = 0
+window.visibleCards = 4
+window.allHotels = []
 
 function moveCarousel(direction){
 
@@ -9,7 +15,6 @@ function moveCarousel(direction){
 
         startIndex++
 
-        // se precisar carregar nova página
         if(startIndex + visibleCards > allHotels.length && currentPage < totalPages){
 
             currentPage++
@@ -30,19 +35,3 @@ function moveCarousel(direction){
     renderHotels()
 
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    document.querySelector(".arrow.left").addEventListener("click", () => {
-
-        moveCarousel("prev")
-
-    })
-
-    document.querySelector(".arrow.right").addEventListener("click", () => {
-
-        moveCarousel("next")
-
-    })
-
-})

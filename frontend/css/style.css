@@ -180,3 +180,70 @@ body{
     transition:0.3s;
     z-index:10;
 }
+
+
+/*elementos sobrepostos*/
+.hotel-image{
+    position:relative;
+}
+
+.hotel-image img{
+    width:100%;
+    height:150px;
+    object-fit:cover;
+}
+
+
+/*botão favoritar*/
+.favorite{
+    position:absolute;
+    top:10px;
+    right:10px;
+    background:white;
+    border-radius:50%;
+    width:32px;
+    height:32px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    cursor:pointer;
+    box-shadow:0 3px 10px rgba(0,0,0,0.2);
+    
+    color:transparent;
+    -webkit-text-stroke:1.5px #333;
+
+    transition:0.2s;
+}
+
+.favorite:hover{
+    transform:scale(1.1);
+}
+
+/*preencher coração*/
+
+.favorite.active{
+    color:red;
+    -webkit-text-stroke:0;
+}
+
+/*botão de reserva*/
+.reserve-btn{
+    position:absolute;
+    bottom:10px;
+    left:25%;
+    transform:translateX(-50%);
+    background:#6C92B6;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:8px;
+    font-size:14px;
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(0,0,0,0.25);
+    transition:0.2s;
+}
+
+.reserve-btn:hover{
+    background:#0D5F6F;
+}
