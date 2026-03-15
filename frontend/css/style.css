@@ -42,7 +42,7 @@ body{
     background:white;
     border-radius:15px;
     padding:10px;
-    width:600px;
+    width:700px;
     box-shadow:0 10px 30px rgba(0,0,0,0.3);
 }
 
@@ -68,11 +68,12 @@ body{
 
 .carousel-container{
     position:absolute;
-    bottom:100px;
+    bottom:60px;
     width:100%;
     display:flex;
     align-items:center;
     justify-content:center;
+    padding:0 60px;
 }
 
 /* CARDS */
@@ -80,6 +81,10 @@ body{
 .cards-wrapper{
     display:flex;
     gap:20px;
+    max-width:1200px;
+    width:100%;
+    justify-content:center;
+    flex-wrap: nowrap;
 }
 
 /* CARD BASE */
@@ -144,4 +149,34 @@ body{
 
 .dots-container span.active{
     opacity:1;
+}
+
+
+/* SEARCH OVERLAY */
+
+.search-overlay{
+    position:fixed;
+    inset:0;
+    backdrop-filter:blur(8px);
+    background:rgba(0,0,0,0.3);
+    opacity:0;
+    pointer-events:none;
+    transition:0.3s;
+}
+
+/* busca ativa */
+
+.search-active .search-overlay{
+    opacity:1;
+    pointer-events:auto;
+}
+
+/* barra cresce */
+
+.search-active .search-container{
+    top:20%;
+    width:750px;
+    transform:translate(-50%, -50%) scale(1.05);
+    transition:0.3s;
+    z-index:10;
 }

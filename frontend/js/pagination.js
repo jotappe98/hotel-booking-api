@@ -1,3 +1,5 @@
+//controle dos dots(pontos,bolinhas)
+
 function updateDots(){
 
     const dotsContainer = document.getElementById("dots")

@@ -1,33 +1,48 @@
-let currentPage = 1
-let totalPages = 1
+//navegação entre páginas
 
+window.currentPage = 1
+window.totalPages = 1
 
-function changePage(page){
+function moveCarousel(direction){
 
-    if(page < 1 || page > totalPages){
-        return
+    if(direction === "next"){
+
+        startIndex++
+
+        // se precisar carregar nova página
+        if(startIndex + visibleCards > allHotels.length && currentPage < totalPages){
+
+            currentPage++
+            loadHotels(currentPage)
+
+        }
+
     }
 
-    currentPage = page
+    if(direction === "prev"){
 
-    loadHotels(currentPage)
+        if(startIndex > 0){
+            startIndex--
+        }
+
+    }
+
+    renderHotels()
 
 }
-
 
 document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelector(".arrow.left").addEventListener("click", () => {
 
-        changePage(currentPage - 1)
+        moveCarousel("prev")
 
     })
 
     document.querySelector(".arrow.right").addEventListener("click", () => {
 
-        changePage(currentPage + 1)
+        moveCarousel("next")
 
     })
 
 })
-

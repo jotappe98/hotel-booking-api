@@ -1,5 +1,8 @@
-window.currentPage = 1
-window.totalPages = 1
+//renderização dos hotéis
+
+let allHotels = []
+let startIndex = 0
+const visibleCards = 5
 
 async function loadHotels(page = 1, search = "") {
 
@@ -7,20 +10,31 @@ async function loadHotels(page = 1, search = "") {
 
     totalPages = data.total_paginas
 
-    const hotels = data.hoteis
+    // adiciona novos hotéis ao cache
+    allHotels = [...allHotels, ...data.hoteis]
+
+    renderHotels()
+
+
+}
+
+function renderHotels(){
 
     const cardsContainer = document.getElementById("hotelCards")
 
     cardsContainer.innerHTML = ""
 
-    hotels.forEach(hotel => {
+    const visibleHotels = allHotels.slice(startIndex, startIndex + visibleCards)
+
+    visibleHotels.forEach(hotel => {
 
         const card = document.createElement("div")
         card.classList.add("hotel-card")
 
         card.innerHTML = `
         
-            <img src="${hotel.imagem_url}" alt="${hotel.nome}">
+            <img src="${hotel.imagem_url.trim()}" alt="${hotel.nome}">
+            
             
             <div class="hotel-card-content">
             
@@ -40,6 +54,8 @@ async function loadHotels(page = 1, search = "") {
 
     })
 
+    updateDots()
+
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -47,5 +63,3 @@ document.addEventListener("DOMContentLoaded", () => {
     loadHotels()
 
 })
-
-updateDots()
