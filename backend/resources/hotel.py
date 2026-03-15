@@ -4,6 +4,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from flask_jwt_extended import jwt_required
 
 path_params = reqparse.RequestParser()
+path_params.add_argument('busca', type=str, location='args')
 path_params.add_argument('cidade', type=str, location='args')
 path_params.add_argument('avaliacao_min', type=float, location='args')
 path_params.add_argument('avaliacao_max', type=float, location='args')
@@ -32,6 +33,12 @@ class Hoteis(Resource):
         dados = path_params.parse_args()
 
         query = HotelModel.query
+        if dados.get('busca'):
+            termo = f"%{dados['busca']}%"
+            query = query.filter(
+            (HotelModel.nome.ilike(termo)) |
+            (HotelModel.cidade.ilike(termo))
+        )
 
         if dados.get('cidade'):
             query = query.filter(HotelModel.cidade == dados['cidade'])
