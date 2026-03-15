@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel Booking</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <section class="hero">
+
+        <!-- BACKGROUND -->
+        <div class="hero-background"></div>
+
+        <!-- SEARCH -->
+        <div class="search-container">
+
+            <input 
+                type="text"
+                id="searchInput"
+                placeholder="Buscar cidade ou hotel..."
+            >
+
+            <button id="searchButton">
+                🔍
+            </button>
+
+        </div>
+
+
+        <!-- CAROUSEL DE HOTÉIS -->
+        <div class="carousel-container">
+
+            <button class="arrow left">❮</button>
+
+            <div class="cards-wrapper" id="hotelCards">
+
+                <!-- cards serão inseridos aqui via JS -->
+
+            </div>
+
+            <button class="arrow right">❯</button>
+
+        </div>
+
+
+        <!-- DOTS -->
+        <div class="dots-container" id="dots"></div>
+
+    </section>
+
+    <script src="js/api.js"></script>
+    <script src="js/renderHotels.js"></script>
+    <script src="js/carousel.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/pagination.js"></script>
+
+</body>
+
+</html>
