@@ -1,6 +1,11 @@
+window.currentPage = 1
+window.totalPages = 1
+
 async function loadHotels(page = 1, search = "") {
 
     const data = await getHotels(page, search)
+
+    totalPages = data.total_paginas
 
     const hotels = data.hoteis
 
@@ -42,3 +47,5 @@ document.addEventListener("DOMContentLoaded", () => {
     loadHotels()
 
 })
+
+updateDots()
