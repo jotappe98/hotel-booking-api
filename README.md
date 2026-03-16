@@ -1,6 +1,10 @@
-API REST desenvolvida com **Python** e **Flask** como projeto de estudo, com o objetivo de praticar conceitos de backend como autenticação, integração com banco de dados e arquitetura RESTful.
+# Hotel Booking API
 
-## Tecnologias
+API REST desenvolvida com **Python e Flask** como projeto de estudo para praticar conceitos de backend como autenticação, integração com banco de dados e arquitetura REST.
+
+O projeto simula um sistema simples de hotéis, permitindo cadastro de usuários, autenticação com JWT e gerenciamento de hotéis.
+
+## Tecnologias utilizadas
 
 - Python
 - Flask
@@ -8,39 +12,85 @@ API REST desenvolvida com **Python** e **Flask** como projeto de estudo, com o o
 - Flask-JWT-Extended
 - Flask-SQLAlchemy
 - SQLite
+- Postman (testes da API)
 
 ## Funcionalidades
 
-- Registro e autenticação de usuários (JWT)
-- CRUD de hotéis (Criar, Ler, Atualizar, Deletar)
-- Rotas protegidas utilizando JWT
-- Lista negra de tokens (logout)
-- **Hotéis mock adicionados para testar filtros avançados** (por cidade, valor da diária e avaliação)
+- Cadastro de usuários
+- Login com autenticação JWT
+- Logout com lista negra de tokens
+- CRUD completo de hotéis
+- Rotas protegidas que exigem autenticação
+- Filtros de busca por:
+  - cidade
+  - hotel
+  
 
-## Como rodar o projeto
+Para facilitar os testes, foram adicionados **hotéis mockados** no banco de dados.
+
+## Estrutura básica da API
+
+Alguns exemplos de endpoints disponíveis:
+
+POST /register
+POST /login
+POST /logout
+
+GET /hoteis
+GET /hoteis/<id>
+
+POST /hoteis
+PUT /hoteis/<id>
+DELETE /hoteis/<id>
+
+
+## Como executar o projeto
+
+Clone o repositório:
 
 ```bash
-# clone o repositório
-git clone https://github.com/your-username/hotel-booking-api.git
+git clone https://github.com/seu-usuario/hotel-booking-api.git
 
-# entre na pasta do projeto
+Entre na pasta do projeto:
+
 cd hotel-booking-api
 
-# crie um ambiente virtual
+Crie um ambiente virtual:
+
 python -m venv venv
 
-# ative o venv
-# Windows
+Ative o ambiente virtual:
+
 venv\Scripts\activate
-# Linux/Mac
+
+Linux/MAC:
 source venv/bin/activate
 
-# instale as dependências
+instale as dependências:
+
 pip install -r requirements.txt
 
-# rode a aplicação
+Execute a aplicação:
+
 python main.py
 
-## Sobre o projeto
-Este projeto foi desenvolvido como parte de um curso prático de APIs REST com Python e Flask, com o objetivo de consolidar conceitos como autenticação, CRUD, banco de dados e boas práticas de backend. O código foi implementado e testado por mim usando Postman, servindo como base para estudos e futuras melhorias.
-```
+Vai estar disponível em:
+
+http://127.0.0.1:5000
+
+Testes
+Os endpoints da API foram testados utilizando Postman, permitindo validar autenticação, criação de usuários e operações de CRUD.
+
+Sobre o projeto
+
+Este projeto foi desenvolvido como parte dos meus estudos em backend com Python, com o objetivo de praticar conceitos importantes como:
+
+criação de APIs REST
+
+autenticação com JWT
+
+integração com banco de dados
+
+organização básica de um projeto backend
+
+Ele serve como base para aprendizado e para futuras melhorias.
