@@ -46,32 +46,26 @@ DELETE /hoteis/<id>
 
 ## Como executar o projeto
 
-Clone o repositório:
+# 1. Clone o repositório
+git clone <url-do-repo>
 
-```bash
-git clone https://github.com/seu-usuario/hotel-booking-api.git
+# 2. Acesse a pasta do backend
+cd backend
 
-Entre na pasta do projeto:
-
-cd hotel-booking-api
-
-Crie um ambiente virtual:
+# 3. Crie e ative o ambiente virtual 
 
 python -m venv venv
 
-Ative o ambiente virtual:
-
+# Windows (PowerShell)
 venv\Scripts\activate
 
-Linux/MAC:
+# Linux / macOS
 source venv/bin/activate
 
-instale as dependências:
-
+# 4. Instale as dependências
 pip install -r requirements.txt
 
-Execute a aplicação:
-
+# 5. Execute a aplicação
 python main.py
 
 Vai estar disponível em:
